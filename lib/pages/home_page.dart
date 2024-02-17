@@ -54,6 +54,11 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
+  Future<void> getForecastSearch(String cityName) async {
+    _forecastModel = await ApiServices().getForecastInfoFromSearch(cityName);
+    setState(() {});
+  }
+
   @override
   void initState() {
     // getWeatherInfo(-11.240446, -77.626040).then((value) {
@@ -83,7 +88,9 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              // getForecastSearch(_searhController.text);
+            },
             icon: Icon(
               Icons.location_on_outlined,
             ),
@@ -104,7 +111,9 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          getForecastSearch(_searhController.text);
+                        },
                         icon: Icon(
                           Icons.search,
                           color: Colors.white,
@@ -218,22 +227,25 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 16,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  child: Row(
-                    children: List.generate(
-                      _forecastModel!.forecast.forecastday[0].hour.length,
-                      (index) => ForecastItem(
-                        isDay: _forecastModel!
-                            .forecast.forecastday[0].hour[index].isDay,
-                        value: _forecastModel!
-                            .forecast.forecastday[0].hour[index].tempC
-                            .toString(),
-                        time: _forecastModel!
-                            .forecast.forecastday[0].hour[index].time
-                            .toString()
-                            .substring(11, 16),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 32),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
+                    child: Row(
+                      children: List.generate(
+                        _forecastModel!.forecast.forecastday[0].hour.length,
+                        (index) => ForecastItem(
+                          isDay: _forecastModel!
+                              .forecast.forecastday[0].hour[index].isDay,
+                          value: _forecastModel!
+                              .forecast.forecastday[0].hour[index].tempC
+                              .toString(),
+                          time: _forecastModel!
+                              .forecast.forecastday[0].hour[index].time
+                              .toString()
+                              .substring(11, 16),
+                        ),
                       ),
                     ),
                   ),

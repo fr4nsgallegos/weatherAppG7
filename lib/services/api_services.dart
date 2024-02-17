@@ -31,4 +31,17 @@ class ApiServices {
     }
     return null;
   }
+
+  Future<ForecastModel?> getForecastInfoFromSearch(String cityName) async {
+    Uri url = Uri.parse(
+        "http://api.weatherapi.com/v1/forecast.json?key=70866d7ade244a3c9ca20142230509&q=$cityName&days=1&aqi=no&alerts=no");
+
+    http.Response response = await http.get(url);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(response.body);
+      ForecastModel forecastModel = ForecastModel.fromJson(data);
+      return forecastModel;
+    }
+    return null;
+  }
 }
