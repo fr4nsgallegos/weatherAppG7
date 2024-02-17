@@ -55,7 +55,26 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getForecastSearch(String cityName) async {
-    _forecastModel = await ApiServices().getForecastInfoFromSearch(cityName);
+    ForecastModel? _forecastModelAux;
+    _forecastModelAux = await ApiServices().getForecastInfoFromSearch(cityName);
+    if (_forecastModelAux == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Hubo un inconveniente, intenta ingresar otra ciudad",
+          ),
+          backgroundColor: Colors.red,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } else {
+      _forecastModel = _forecastModelAux;
+      _searhController.clear();
+      setState(() {});
+    }
     setState(() {});
   }
 
