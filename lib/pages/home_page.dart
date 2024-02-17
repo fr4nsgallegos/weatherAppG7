@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              // getForecastSearch(_searhController.text);
+              getDataLocation();
             },
             icon: Icon(
               Icons.location_on_outlined,
@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       validator: (String? value) {
-                        if (value != null) {
+                        if (value != null && value.isEmpty) {
                           return "El campo es obligatorio";
                         }
                         return null;
