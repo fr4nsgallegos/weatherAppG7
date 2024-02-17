@@ -104,9 +104,21 @@ class HomePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    WeatherItem(),
-                    WeatherItem(),
-                    WeatherItem(),
+                    WeatherItem(
+                      value: "6",
+                      unit: "km/h",
+                      imagePath: "windspeed",
+                    ),
+                    WeatherItem(
+                      value: "58",
+                      unit: "%",
+                      imagePath: "humidity",
+                    ),
+                    WeatherItem(
+                      value: "100",
+                      unit: "%",
+                      imagePath: "cloud",
+                    ),
                   ],
                 ),
               ],
