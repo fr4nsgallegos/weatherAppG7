@@ -36,26 +36,26 @@ class ForecastModel {
 class Current {
   int lastUpdatedEpoch;
   String lastUpdated;
-  int tempC;
+  double tempC;
   double tempF;
   int isDay;
   Condition condition;
   double windMph;
   double windKph;
   int windDegree;
-  WindDir windDir;
-  int pressureMb;
+  String windDir;
+  double pressureMb;
   double pressureIn;
-  int precipMm;
-  int precipIn;
+  double precipMm;
+  double precipIn;
   int humidity;
   int cloud;
   double feelslikeC;
   double feelslikeF;
-  int visKm;
-  int visMiles;
-  int uv;
-  int gustMph;
+  double visKm;
+  double visMiles;
+  double uv;
+  double gustMph;
   double gustKph;
 
   Current({
@@ -94,7 +94,7 @@ class Current {
         windMph: json["wind_mph"]?.toDouble(),
         windKph: json["wind_kph"]?.toDouble(),
         windDegree: json["wind_degree"],
-        windDir: windDirValues.map[json["wind_dir"]]!,
+        windDir: json["wind_dir"],
         pressureMb: json["pressure_mb"],
         pressureIn: json["pressure_in"]?.toDouble(),
         precipMm: json["precip_mm"],
@@ -120,7 +120,7 @@ class Current {
         "wind_mph": windMph,
         "wind_kph": windKph,
         "wind_degree": windDegree,
-        "wind_dir": windDirValues.reverse[windDir],
+        "wind_dir": windDir,
         "pressure_mb": pressureMb,
         "pressure_in": pressureIn,
         "precip_mm": precipMm,
@@ -160,11 +160,6 @@ class Condition {
         "code": code,
       };
 }
-
-enum WindDir { S, SSW, SW, WSW }
-
-final windDirValues = EnumValues(
-    {"S": WindDir.S, "SSW": WindDir.SSW, "SW": WindDir.SW, "WSW": WindDir.WSW});
 
 class Forecast {
   List<Forecastday> forecastday;
@@ -262,7 +257,7 @@ class Astro {
 
 class Day {
   double maxtempC;
-  int maxtempF;
+  double maxtempF;
   double mintempC;
   double mintempF;
   double avgtempC;
@@ -271,16 +266,16 @@ class Day {
   double maxwindKph;
   double totalprecipMm;
   double totalprecipIn;
-  int totalsnowCm;
+  double totalsnowCm;
   double avgvisKm;
-  int avgvisMiles;
+  double avgvisMiles;
   int avghumidity;
   int dailyWillItRain;
   int dailyChanceOfRain;
   int dailyWillItSnow;
   int dailyChanceOfSnow;
   Condition condition;
-  int uv;
+  double uv;
 
   Day({
     required this.maxtempC,
@@ -362,12 +357,12 @@ class Hour {
   double windMph;
   double windKph;
   int windDegree;
-  WindDir windDir;
-  int pressureMb;
+  String windDir;
+  double pressureMb;
   double pressureIn;
   double precipMm;
   double precipIn;
-  int snowCm;
+  double snowCm;
   int humidity;
   int cloud;
   double feelslikeC;
@@ -382,11 +377,11 @@ class Hour {
   int chanceOfRain;
   int willItSnow;
   int chanceOfSnow;
-  int visKm;
-  int visMiles;
+  double visKm;
+  double visMiles;
   double gustMph;
   double gustKph;
-  int uv;
+  double uv;
 
   Hour({
     required this.timeEpoch,
@@ -435,7 +430,7 @@ class Hour {
         windMph: json["wind_mph"]?.toDouble(),
         windKph: json["wind_kph"]?.toDouble(),
         windDegree: json["wind_degree"],
-        windDir: windDirValues.map[json["wind_dir"]]!,
+        windDir: json["wind_dir"],
         pressureMb: json["pressure_mb"],
         pressureIn: json["pressure_in"]?.toDouble(),
         precipMm: json["precip_mm"]?.toDouble(),
@@ -472,7 +467,7 @@ class Hour {
         "wind_mph": windMph,
         "wind_kph": windKph,
         "wind_degree": windDegree,
-        "wind_dir": windDirValues.reverse[windDir],
+        "wind_dir": windDir,
         "pressure_mb": pressureMb,
         "pressure_in": pressureIn,
         "precip_mm": precipMm,
