@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   WeatherModel? _model;
   ForecastModel? _forecastModel;
+  TextEditingController _searhController = TextEditingController();
 
   Future<Position> getLocation() async {
     bool _serviceEnabled;
@@ -93,8 +94,47 @@ class _HomePageState extends State<HomePage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Column(
+          : ListView(
               children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                  child: TextFormField(
+                    controller: _searhController,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                      ),
+                      hintText: "Ingresa la ciudad",
+                      fillColor: Colors.white.withOpacity(0.08),
+                      filled: true,
+                      hintStyle: TextStyle(
+                        color: Colors.white54,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.all(24),
                   padding: EdgeInsets.symmetric(
@@ -169,6 +209,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   "Forecast",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
@@ -191,7 +232,8 @@ class _HomePageState extends State<HomePage> {
                             .toString(),
                         time: _forecastModel!
                             .forecast.forecastday[0].hour[index].time
-                            .toString(),
+                            .toString()
+                            .substring(11, 16),
                       ),
                     ),
                   ),
