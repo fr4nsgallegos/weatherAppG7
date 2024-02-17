@@ -6,6 +6,11 @@ class WeatherModel {
     required this.location,
     required this.current,
   });
+
+  factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
+        location: Location.fromJson(json["location"]),
+        current: Current.fromJson(json["current"]),
+      );
 }
 
 class Location {
@@ -15,6 +20,11 @@ class Location {
     required this.name,
     required this.country,
   });
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+        name: json["name"],
+        country: json["contry"],
+      );
 }
 
 class Current {
@@ -26,4 +36,10 @@ class Current {
     required this.cloud,
     required this.wind_kph,
   });
+
+  factory Current.fromJson(Map<String, dynamic> json) => Current(
+        humidity: json["humidity"],
+        cloud: json["cloud"],
+        wind_kph: json["wind_kph"],
+      );
 }
