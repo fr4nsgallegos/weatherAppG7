@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:weatherappg7/widgets/forecast_item.dart';
 import 'package:weatherappg7/widgets/weather_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -55,7 +56,7 @@ class HomePage extends StatelessWidget {
             margin: EdgeInsets.all(24),
             padding: EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: 32,
+              vertical: 24,
             ),
             // height: MediaQuery.of(context).size.height * .6,
             // width: double.infinity,
@@ -121,48 +122,19 @@ class HomePage extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 24,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: Color(0xff3E4145),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.7),
-                  blurRadius: 4,
-                  offset: Offset(4, 8),
-                ),
-              ],
-            ),
-            child: Column(
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
               children: [
-                Text(
-                  "01:00",
-                  style: TextStyle(
-                    color: Colors.white38,
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Image.asset(
-                  "assets/images/overcast.png",
-                  height: 50,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  "5.6 °C",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                )
+                ForecastItem(),
+                ForecastItem(),
+                ForecastItem(),
+                ForecastItem(),
+                ForecastItem(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
