@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         height: 8,
                       ),
                       Text(
-                        "${_model!.current.temp_c}°",
+                        "${_model!.current.tempC}°",
                         style: TextStyle(
                           fontSize: 100,
                           color: Colors.white,
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           WeatherItem(
-                            value: _model!.current.wind_kph.toString(),
+                            value: _model!.current.windKph.toString(),
                             unit: "km/h",
                             imagePath: "windspeed",
                           ),
